@@ -38,25 +38,25 @@ Two Matlab functions are provided: "yacudeconv" and "psf_lscm". The
 The "psf_lscm" generates a Gaussian approximation of the point-spread function
 for a laser-scanning confocal microscope.
 
->  yacudeconv Deconvolvolve image using Richardson-Lucy method with CUDA
->  J = yacudeconv(I, PSF) 
->  J = yacudeconv(I, PSF, NUMIT)
->  deconvolves image I using Richardson-Lucy algorithm, returning 
->  deconvolved image J. The assumption is that the image I was created 
->  by convolving a true image with a point-spread function PSF and 
->  possibly by adding noise. The central pixel in the PSF array corresponds
->  to the center of the psf.
->  I and PSF must be 3-Dimensional arrays. 
->  NUMIT (optional) is the number of iterations (default is 10)
->
->  psf_lscm Compute a Gaussian PSF for a Laser-Scanning Confocal Microscope
->  P = psf_lscm(LATERAL, AXIAL, LAMBDA_EX, LAMBDA_EM, NA, N, D)
->  LATERAL and AXIAL are the lateral and axial spacings (in metres).
->  LAMBDA_EX and LAMBDA_EM are the excitation and emission wavelengths (in
->  metres).
->  NA is the microscope objective Numerical Aperture.
->  N is the sample medium refractive index.
->  D is the pinhole diameter in Airy Units.
+  yacudeconv Deconvolvolve image using Richardson-Lucy method with CUDA
+  J = yacudeconv(I, PSF) 
+  J = yacudeconv(I, PSF, NUMIT)
+  deconvolves image I using Richardson-Lucy algorithm, returning 
+  deconvolved image J. The assumption is that the image I was created 
+  by convolving a true image with a point-spread function PSF and 
+  possibly by adding noise. The central pixel in the PSF array corresponds
+  to the center of the psf.
+  I and PSF must be 3-Dimensional arrays. 
+  NUMIT (optional) is the number of iterations (default is 10)
+
+  psf_lscm Compute a Gaussian PSF for a Laser-Scanning Confocal Microscope
+  P = psf_lscm(LATERAL, AXIAL, LAMBDA_EX, LAMBDA_EM, NA, N, D)
+  LATERAL and AXIAL are the lateral and axial spacings (in metres).
+  LAMBDA_EX and LAMBDA_EM are the excitation and emission wavelengths (in
+  metres).
+  NA is the microscope objective Numerical Aperture.
+  N is the sample medium refractive index.
+  D is the pinhole diameter in Airy Units.
 
 C interface
 -----------
@@ -74,14 +74,16 @@ FFT buffer in GPU memory.
 
 All three implementations have the same interface:
 
-> unsigned int deconv_{device,stream,host}(unsigned int iter, 
->                                          unsigned int N1, 
->                                          unsigned int N2, 
->                                          unsigned int N3, 
->                                          float *h_image, 
->                                          float *h_psf, 
->                                          float *h_object);
-> 
+```
+unsigned int deconv_{device,stream,host}(unsigned int iter, 
+                                         unsigned int N1, 
+                                         unsigned int N2, 
+                                         unsigned int N3, 
+                                         float *h_image, 
+                                         float *h_psf, 
+                                         float *h_object);
+```
+ 
 
 * iter is the number of iterations
 * N1, N2 and N3 are the dimensions of the image, psf and object buffers
