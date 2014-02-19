@@ -1,0 +1,6 @@
+libyacudecu.so: deconv.o
+	gcc -fPIC -shared -o libyacudecu.so deconv.o -lcufft -lcudart_static
+
+deconv.o: deconv.cu
+	nvcc -O3 -Xcompiler=-fPIC -c -o deconv.o deconv.cu
+

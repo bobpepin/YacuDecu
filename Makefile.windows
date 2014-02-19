@@ -1,0 +1,5 @@
+libyacudecu.dll: deconv.obj
+	nvcc -shared -Xlinker=/EXPORT:deconv_device -Xlinker=/EXPORT:deconv_host -Xlinker=/EXPORT:deconv_stream -o libyacudecu.dll deconv.obj -lcufft
+
+deconv.obj: deconv.cu
+	nvcc -Xcompiler=/LD -O3 -c -o deconv.obj deconv.cu
