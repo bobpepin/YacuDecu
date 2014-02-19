@@ -12,8 +12,8 @@ The software has been tested on 64bit Linux and Windows 7.
 
 How to install:
 1. Install the CUDA SDK (>= 5.5) from nVidia
-2a. On Linux: make -f Makefile.linux
-2b. On Windows: make -f Makefile.windows
+2. On Linux: make -f Makefile.linux
+   On Windows: make -f Makefile.windows
 
 This will give you the corresponding dynamic library (.so on Linux, .dll on
 Windows), which you can link into your C programs or call from within Matlab.
@@ -90,9 +90,9 @@ unsigned int deconv_{device,stream,host}(unsigned int iter,
   meaning of which can be found in the nVidia documentation for the CUDA or
   CUFFT libraries respectively (cudaError_t or cufftResult types respectively).
 
-deconv_device uses 5 buffers of N1*N2*N3 32-bit floats of GPU memory.
-deconv_stream uses 3 buffers of N1*N2*N3 32-bit floats of GPU memory.
-deconv_host uses 1 buffer of N1*N2*N3 32-bit floats of GPU memory.
+* deconv_device uses 5 buffers of N1*N2*N3 32-bit floats of GPU memory.
+* deconv_stream uses 3 buffers of N1*N2*N3 32-bit floats of GPU memory.
+* deconv_host uses 1 buffer of N1*N2*N3 32-bit floats of GPU memory.
 
 In my experience, the memory transfers in deconv_stream overlap well with the
 FFT and the performance difference to deconv_device was small, which is why it
