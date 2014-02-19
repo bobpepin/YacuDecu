@@ -5,7 +5,8 @@ function O = yacudeconv(I, psf, varargin)
 % deconvolves image I using Richardson-Lucy algorithm, returning 
 % deconvolved image J. The assumption is that the image I was created 
 % by convolving a true image with a point-spread function PSF and 
-% possibly by adding noise.
+% possibly by adding noise. The central pixel in the PSF array corresponds
+% to the center of the psf.
 %
 % I and PSF must be 3-Dimensional arrays.
 %
