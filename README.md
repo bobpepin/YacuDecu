@@ -38,6 +38,7 @@ Two Matlab functions are provided: "yacudeconv" and "psf_lscm". The
 The "psf_lscm" generates a Gaussian approximation of the point-spread function
 for a laser-scanning confocal microscope.
 
+```
   yacudeconv Deconvolvolve image using Richardson-Lucy method with CUDA
   J = yacudeconv(I, PSF) 
   J = yacudeconv(I, PSF, NUMIT)
@@ -57,6 +58,7 @@ for a laser-scanning confocal microscope.
   NA is the microscope objective Numerical Aperture.
   N is the sample medium refractive index.
   D is the pinhole diameter in Airy Units.
+```
 
 C interface
 -----------
@@ -94,9 +96,10 @@ unsigned int deconv_{device,stream,host}(unsigned int iter,
   meaning of which can be found in the nVidia documentation for the CUDA or
   CUFFT libraries respectively (cudaError_t or cufftResult types respectively).
 
-* deconv_device uses 5 buffers of N1*N2*N3 32-bit floats of GPU memory.
-* deconv_stream uses 3 buffers of N1*N2*N3 32-bit floats of GPU memory.
-* deconv_host uses 1 buffer of N1*N2*N3 32-bit floats of GPU memory.
+
+* deconv_device uses 5 buffers of N1 x N2 x N3 32-bit floats of GPU memory.
+* deconv_stream uses 3 buffers of N1 x N2 x N3 32-bit floats of GPU memory.
+* deconv_host uses 1 buffer of N1 x N2 x N3 32-bit floats of GPU memory.
 
 In my experience, the memory transfers in deconv_stream overlap well with the
 FFT and the performance difference to deconv_device was small, which is why it
