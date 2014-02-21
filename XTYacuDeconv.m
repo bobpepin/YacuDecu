@@ -214,7 +214,10 @@ for i=1:length(channels)
     set(g, 'ColumnSizes', [-1 60], 'RowSizes', 25*ones(1, length(chinputs)));
     
     filebox = uiextras.VBox('Parent', card);
-    controls(i).psfiterations = uicontrol('Parent', filebox, edprops{:}, 'String', '20');
+    iterbox = uiextras.HBox('Parent', filebox);
+    uicontrol('Parent', iterbox, 'Style', 'text', 'String', 'Iterations', 'HorizontalAlign', 'left');
+    controls(i).psfiterations = uicontrol('Parent', iterbox, edprops{:}, 'String', '20');
+    set(iterbox, 'Sizes', [-1 60]);
 %    uicontrol('Parent', filebox, 'Style', 'text', 'String', 'PSF File');
     but = uicontrol('Parent', filebox, 'Style', 'pushbutton', 'String', 'Load PSF file');
     fname = uicontrol('Parent', filebox, 'Style', 'edit', 'Enable', 'inactive');
