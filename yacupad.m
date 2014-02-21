@@ -1,8 +1,14 @@
-function I = yacupad(I)
+function I = yacupad(I, varargin)
+
+if nargin < 2
+    initsize = size(I);
+else
+    initsize = max(size(I), varargin{1});
+end
 
 n = [2 3 5 7];
-padsize = arrayfun(@(a) lgm(a, n), size(I));
-I = padarray(padarray(I, floor((padsize - size(I))/2)), mod(padsize - size(I), 2), 'pre');
+padsize = arrayfun(@(a) lgm(a, n), initsize);
+I = padarray(padarray(I, floor((padsize - size(I))/2), 'circular'), mod(padsize - size(I), 2), 'circular', 'pre');
 
 end
 

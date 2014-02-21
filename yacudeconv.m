@@ -5,8 +5,7 @@ function O = yacudeconv(I, psf, varargin)
 % deconvolves image I using Richardson-Lucy algorithm, returning 
 % deconvolved image J. The assumption is that the image I was created 
 % by convolving a true image with a point-spread function PSF and 
-% possibly by adding noise. The central pixel in the PSF array corresponds
-% to the center of the psf.
+% possibly by adding noise.
 %
 % I and PSF must be 3-Dimensional arrays.
 %
@@ -28,7 +27,7 @@ I = single(I);
 
 psf = single(psf);
 
-h = ifftshift(padarray(padarray(psf, floor((size(I) - size(psf))/2)), mod(size(I)-size(psf), 2), 'pre'));
+h = ifftshift(padarray(padarray(psf, floor((size(I) - size(psf))/2), 'circular'), mod(size(I)-size(psf), 2), 'circular', 'pre'));
 
 if ~libisloaded('libyacudecu')
     loadlibrary('libyacudecu', 'yacudecu.h');
@@ -36,6 +35,9 @@ end
 
 %init = imfilter(I, fspecial('gaussian'));
 init = I;
+%sum(~isfinite(init(:)))
+%sum(~isfinite(h(:)))
+
 [status, ~, ~, out] = calllib('libyacudecu', ['deconv_' flavour], numiter, size(I, 3), size(I, 2), size(I, 1), I, h, init);
 if status == 38
     error('YacuDecu:cudaError', 'CUDA error: No CUDA devices detected (error code 38)');
