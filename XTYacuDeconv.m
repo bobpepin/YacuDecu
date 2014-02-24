@@ -277,7 +277,7 @@ uicontrol('Parent', bbox, 'String', 'Start Deconvolution', 'Callback', @(ho, ed)
 uiextras.Empty('Parent', bbox);
 uicontrol('Parent', bbox, 'String', 'Cancel', 'Callback', @(ho, ed) set(dlg, 'UserData', false));
 
-uicontrol('Parent', bigpanel, 'Style', 'text', 'String', 'Copyright (c) 2014 Bob Pepin', 'FontSize', 8, 'HorizontalAlign', 'right');
+uicontrol('Parent', bigpanel, 'Style', 'text', 'String', 'Copyright (c) 2014 Bob Pepin (https://github.com/bobpepin/YacuDecu)', 'FontSize', 8, 'HorizontalAlign', 'right');
 
 set(bigpanel, 'Sizes', [-1 -4 -6 -1 15]);
 
