@@ -2,6 +2,7 @@ function O = yacudeconv(I, psf, varargin)
 % YACUDECONV Deconvolvolve image using Richardson-Lucy method with CUDA
 % J = yacudeconv(I, PSF) 
 % J = yacudeconv(I, PSF, NUMIT)
+% J = yacudeconv(I, PSF, NUMIT, INIT)
 % deconvolves image I using Richardson-Lucy algorithm, returning 
 % deconvolved image J. The assumption is that the image I was created 
 % by convolving a true image with a point-spread function PSF and 
@@ -10,17 +11,25 @@ function O = yacudeconv(I, psf, varargin)
 % I and PSF must be 3-Dimensional arrays.
 %
 % NUMIT (optional) is the number of iterations (default is 10)
+%
+% INIT (optional) is the initial guess for the iterative algorithm
 
-if nargin < 3
+if nargin < 3 || isempty(varargin{1})
     numiter = 10;
 else
     numiter = varargin{1};
 end
 
-if nargin < 4
+if nargin < 4 || isempty(varargin{2})
+    init = I;
+else
+    init = varargin{2};
+end
+
+if nargin < 5 || isempty(varargin{3})
     flavour = 'stream';
 else
-    flavour = varargin{2};
+    flavour = varargin{3};
 end
 
 I = single(I);
@@ -30,11 +39,15 @@ psf = single(psf);
 h = ifftshift(padarray(padarray(psf, floor((size(I) - size(psf))/2), 'circular'), mod(size(I)-size(psf), 2), 'circular', 'pre'));
 
 if ~libisloaded('libyacudecu')
-    loadlibrary('libyacudecu', 'yacudecu.h');
+    if isdeployed
+        loadlibrary('libyacudecu', @yacudecu_proto);
+    else
+        loadlibrary('libyacudecu', 'yacudecu.h');
+    end
 end
 
 %init = imfilter(I, fspecial('gaussian'));
-init = I;
+%init = I;
 %sum(~isfinite(init(:)))
 %sum(~isfinite(h(:)))
 

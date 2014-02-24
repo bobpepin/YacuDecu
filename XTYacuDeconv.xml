@@ -1,0 +1,7 @@
+    <CustomTools>
+      <Menu>
+        <Item name="CUDA Deconvolution" icon="Matlab" tooltip="Deconvolve using CUDA.">
+          <Command>MatlabExe::XTYacuDeconv %i</Command>
+        </Item>
+      </Menu>
+    </CustomTools>
