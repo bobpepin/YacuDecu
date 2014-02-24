@@ -3,3 +3,6 @@ libyacudecu.dll: deconv.obj
 
 deconv.obj: deconv.cu
 	nvcc -Xcompiler=/LD -O3 -c -o deconv.obj deconv.cu
+
+clean:
+	del *.asv *.dll *.exp *.lib *.obj mccExcludedFiles.log  readme.txt XTYacuDeconv.exe yacudecu_proto.m
