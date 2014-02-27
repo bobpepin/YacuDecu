@@ -10,11 +10,13 @@ Installation
 
 The software has been tested on 64bit Linux and Windows 7.
 
-How to compile:
+Binaries are available at https://github.com/bobpepin/YacuDecu/releases.
+
+If you want to compile the software yourself:
 
 - Install the CUDA SDK (>= 5.5) from nVidia
 - On Linux: make -f Makefile.linux
-- On Windows (with MS VC): nmake -f Makefile.windows
+- On Windows (with Microsoft Visual C++): nmake -f Makefile.windows
 
 This will give you the corresponding dynamic library (.so on Linux, .dll on
 Windows), which you can link into your C programs or call from within Matlab.
