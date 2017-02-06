@@ -1,7 +1,7 @@
 YacuDecu
 ========
 
-CUDA Deconvolution Library for 3D images with C and Matlab API.
+GPU Deconvolution Library for 3D images with C and Matlab API for nVidia GPUs.
 
 This library implements the Richardson-Lucy algorithm on CUDA GPUs.
 
